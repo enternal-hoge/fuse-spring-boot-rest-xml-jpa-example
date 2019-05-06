@@ -1,0 +1,102 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "New API",
+        "description": "A brand new API with no content.  Go nuts!",
+        "version": "1.0"
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/todo": {
+            "post": {
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Create a new task.",
+                        "schema": {
+                            "$ref": "#/definitions/Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Task created",
+                        "schema": {
+                            "$ref": "#/definitions/Todo"
+                        }
+                    }
+                }
+            }
+        },
+        "/todo/{id}": {
+            "get": {
+                "description": "Get a task by ID.",
+                "responses": {
+                    "200": {
+                        "description": "Task found for ID",
+                        "schema": {
+                            "$ref": "#/definitions/Todo"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "Task deleted"
+                    },
+                    "400": {
+                        "description": "Task not deleted"
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "The ID of the task to find.",
+                    "required": true,
+                    "type": "integer",
+                    "format": "int32"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "Todo": {
+            "title": "Root Type for Todo",
+            "description": "The root of the Todo type's schema.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "task": {
+                    "type": "string"
+                },
+                "completed": {
+                    "type": "boolean"
+                }
+            },
+            "example": "{\n    \"id\": 1,\n    \"task\": \"my task\",\n    \"completed\": false\n}"
+        },
+        "Task": {
+            "title": "Root Type for Task",
+            "description": "The root of the Task type's schema.",
+            "type": "object",
+            "properties": {
+                "task": {
+                    "type": "string"
+                }
+            },
+            "example": "{\n    \"task\": \"my task\"\n}"
+        }
+    }
+}
